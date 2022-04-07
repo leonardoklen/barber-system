@@ -1,0 +1,2 @@
+<p>Api: <a href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/backend/public">http://<?php echo $_SERVER['HTTP_HOST'] ?>/backend/public</a></p>
+<p>Site: <a href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/frontend">http://<?php echo $_SERVER['HTTP_HOST'] ?>/frontend</a></p>
