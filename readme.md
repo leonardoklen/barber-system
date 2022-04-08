@@ -6,16 +6,12 @@ Como rodar o sistema:
 
     2 - Abra o terminal, vá para a pasta raiz do projeto e execute o comando: 
 
-        - docker-compose up -d
+        docker-compose up -d
 
-<<<<<<< HEAD
 
 
     3 - Para instalar as dependências do backend siga os passos abaixo:
 
-=======
-    3 - Para instalar as dependências do backend siga os passos abaixo:
->>>>>>> 29c4fe6ebc6ade79e97db835353acaf3b8ab910a
         - Acesse o bash da imagem do php;
 
         - Execute os seguintes comandos linha por linha (um de cada vez):
