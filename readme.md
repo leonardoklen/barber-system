@@ -1,4 +1,4 @@
-<h1 align="center"> ⚒️ API Barber System ⚒️ </h1>
+<h1 align="center"> ⚒️ Barber System ⚒️ </h1>
 
 <h1 aligtn="center" id="instalandoAplicacao"> Instalando Aplicação </h1>
 
