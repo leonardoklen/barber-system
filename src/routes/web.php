@@ -25,6 +25,6 @@ Route::get('/esqueceu-senha', function () {
     return view('pages.forgot-password');
 });
 
-Route::get('/agendamentos', function () {
-    return view('pages.schedules');
+Route::get('/inicio', function () {
+    return view('pages.home');
 });
