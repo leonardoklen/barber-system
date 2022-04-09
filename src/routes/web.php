@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/entrar', function () {
+    return view('pages.login');
+});
+
+Route::get('/esqueceu-senha', function () {
+    return view('pages.forgot-password');
+});
+
+Route::get('/agendamentos', function () {
+    return view('pages.schedules');
+});
