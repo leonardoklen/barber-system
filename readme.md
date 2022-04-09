@@ -14,10 +14,6 @@ docker-compose up -d
 composer install
 ~~~
 
-<p> 3° - Na pasta src remover a extensão .example do arquivo .env: </p>
+<p> 3° - Na pasta src remover a extensão .example do arquivo .env </p>
 
-<p> 4° - O projeto roda na porta 8088 </p>
-
-<br>
-
-[localhost:8088](localhost:8088)
+<p> 4° - O projeto é executado no link > localhost:8088</p>
