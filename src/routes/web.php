@@ -18,13 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/entrar', function () {
-    return view('pages.login');
+    return view('pages.login.index');
 });
 
 Route::get('/esqueceu-senha', function () {
-    return view('pages.forgot-password');
+    return view('pages.forgot-password.index');
 });
 
 Route::get('/inicio', function () {
-    return view('pages.home');
+    return view('pages.home.index');
 });

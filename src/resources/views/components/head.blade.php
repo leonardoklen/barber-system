@@ -13,6 +13,8 @@
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.css" rel="stylesheet">
 
+    <link href='assets/vendor/full-calendar/lib/main.css' rel='stylesheet' />
+
     <title>@yield('title')</title>
 
 </head>

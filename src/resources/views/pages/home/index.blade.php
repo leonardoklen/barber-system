@@ -231,6 +231,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id='calendar'></div>
                 
                 </div>
                 <!-- /.container-fluid -->
@@ -272,6 +274,7 @@
     </div>  
     
     @include('components.scripts')
+    <script src="assets/js/pages/home/calendar.js"></script>
 </body>
 
 </html>
