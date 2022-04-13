@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
       initialView: 'timeGridThreeDay',
       headerToolbar: {
         left: 'prev,next',
-        center: 'addEventButton',
+        center: '',
         right: 'timeGridThreeDay,timeGridWeek,dayGridMonth'
       },
       views: {
@@ -28,31 +28,22 @@ document.addEventListener('DOMContentLoaded', function() {
         minute: '2-digit',
         omitZeroMinute: false,
         meridiem: 'short'
-      },
-      customButtons: {
-        addEventButton: {
-          text: 'add event...',
-          click: function() {
-            var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-            var date = new Date(dateStr + 'T00:00:00'); // will be in local time
-  
-            if (!isNaN(date.valueOf())) { // valid?
-              calendar.addEvent({
-                title: 'dynamic event',
-                start: date,
-                end: date,
-                startTime: '10:00',
-                endTime: '10:30',
-                allDay: false
-              });
-              alert('Great. Now, update your database...');
-            } else {
-              alert('Invalid date.');
-            }
-          }
-        }
-      }
+      },                
+      displayEventTime: false
     });
-    
+    calendar.addEvent({
+      title: 'Leonardo',
+      start: '2022-04-12T10:00:00',
+      end: '2022-04-12T10:30:00',
+      textColor: 'white',
+      backgroundColor: 'blue'
+    });
+    calendar.addEvent({
+      title: 'Vinicius',
+      start: '2022-04-12T10:30:00',
+      end: '2022-04-12T11:00:00',
+      textColor: 'white',
+      backgroundColor: 'purple'
+    });
     calendar.render();  
 });
