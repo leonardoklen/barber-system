@@ -231,9 +231,11 @@
                             </div>
                         </div>
                     </div>
-
-                    <div id='calendar'></div>
-                
+                    
+                    <div class="mt-1 mb-4 text-center">
+                        <div id='calendar'></div>
+                    </div>
+                    
                 </div>
                 <!-- /.container-fluid -->
 

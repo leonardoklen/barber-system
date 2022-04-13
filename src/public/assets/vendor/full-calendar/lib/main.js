@@ -5434,7 +5434,7 @@ var FullCalendar = (function (exports) {
         root: 'fc-theme-standard',
         tableCellShaded: 'fc-cell-shaded',
         buttonGroup: 'fc-button-group',
-        button: 'fc-button fc-button-primary',
+        button: 'fc-button text-white bg-primary border border-light',
         buttonActive: 'fc-button-active',
     };
     StandardTheme.prototype.baseIconClass = 'fc-icon';
