@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('pages.website.home.index');
 });
 
+Route::get('/agendar', function () {
+    return view('pages.website.agendar.index');
+});
+
 Route::get('/entrar', function () {
     return view('pages.administrative-area.login.index');
 });
