@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\SchedulingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/scheduling', [SchedulingController::class, 'create']);
+Route::get('/scheduling', [SchedulingController::class, 'readAll']);
+Route::get('/scheduling/{id}', [SchedulingController::class, 'read']);
+Route::put('/scheduling/{id}', [SchedulingController::class, 'update']);
+Route::delete('/scheduling/{id}', [SchedulingController::class, 'delete']);
