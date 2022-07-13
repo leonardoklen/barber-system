@@ -13,7 +13,7 @@ class SchedulingController extends Controller
         try {
             $scheduling = new Scheduling();
 
-            $scheduling->datetime = $request->datetime;
+            $scheduling->date_time = $request->date_time;
             $scheduling->service  = $request->service;
             $scheduling->name     = $request->name;
             $scheduling->phone    = $request->phone;
@@ -54,7 +54,7 @@ class SchedulingController extends Controller
             $scheduling = Scheduling::find($id);
 
             if (!empty($scheduling)) {
-                $scheduling->datetime = is_null($request->datetime) ? $scheduling->datetime : $request->datetime;
+                $scheduling->date_time = is_null($request->date_time) ? $scheduling->date_time : $request->date_time;
                 $scheduling->service  = is_null($request->service)  ? $scheduling->service  : $request->service;
                 $scheduling->name     = is_null($request->name)     ? $scheduling->name     : $request->name;
                 $scheduling->phone    = is_null($request->phone)    ? $scheduling->phone    : $request->phone;
