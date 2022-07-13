@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SchedulingController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/scheduling', [SchedulingController::class, 'create']);
-Route::get('/scheduling', [SchedulingController::class, 'readAll']);
-Route::get('/scheduling/{id}', [SchedulingController::class, 'read']);
-Route::put('/scheduling/{id}', [SchedulingController::class, 'update']);
-Route::delete('/scheduling/{id}', [SchedulingController::class, 'delete']);
+Route::prefix('scheduling')->group(function () {
+    Route::post('', [SchedulingController::class, 'create']);
+    Route::get('', [SchedulingController::class, 'readAll']);
+    Route::get('/{id}', [SchedulingController::class, 'read']);
+    Route::put('/{id}', [SchedulingController::class, 'update']);
+    Route::delete('/{id}', [SchedulingController::class, 'delete']);
+});
+
+Route::prefix('schedule')->group(function () {
+    Route::get('', [ScheduleController::class, 'getSchedulesPerStatus']);
+});
