@@ -19,12 +19,12 @@ class ScheduleController extends Controller
             $dateFinal = $inputDate . ' 23:59:59';
 
             $schedulings = Scheduling::whereBetween('date_time', [$dateInitial, $dateFinal])->get();
-            $schedules = Schedule::where('status', '=', true)->get();
-            $schedules = ['08:00', '09:00', '10:00'];
+            $schedules = json_decode(Schedule::where('status', '=', true)->first()->getAttributes()['schedules'], true);            
+
             $retorno = [];
             $status = true;
 
-            foreach($schedules as $schedule) {
+            foreach($schedules as $schedule) {                
                 foreach($schedulings as $scheduling) {
                     if(Carbon::createFromFormat('Y-m-d H:i:s', $scheduling['date_time'])->format('H:i') === $schedule) {
                         $status = false;
