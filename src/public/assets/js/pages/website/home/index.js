@@ -2,23 +2,19 @@ const getUrl = window.location;
 const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
 
 $(document).ready(function(){
-    preencherDataAgenda();
+    fillDateSchedule();
     fillSchedules();
     
 });
 
-function preencherDataAgenda(){
-    let hoje = new Date(Date.now());
-    let data = hoje.toLocaleDateString();
+function fillDateSchedule(){
+    let today = new Date(Date.now());
+    let date = today.toLocaleDateString();
 
-    let diasDaSemana = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-    let dia = diasDaSemana[hoje.getDay()];
+    let daysOfTheWeek = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+    let day = daysOfTheWeek[today.getDay()];
 
-    document.getElementById('dateSchedule').innerHTML = `${dia} ${data}`;
-}
-
-function agendar(horario){
-    window.location.href = `${baseUrl}agendar`;
+    document.getElementById('dateSchedule').innerHTML = `${day} ${date}`;
 }
 
 async function fillSchedules(){
@@ -50,16 +46,16 @@ async function fillSchedules(){
         tdAction.setAttribute('width', '20%');
         divSchedule.setAttribute('class', 'text-center');
         divStatus.setAttribute('class', colorTextStatus);
-        buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-warning');
-        buttonAction.setAttribute('onclick', `agendar(${schedule})`);
+        buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-primary');
+        buttonAction.setAttribute('onclick', `schedule("${schedule}")`);
 
         divSchedule.appendChild(contentSchedule);
         divStatus.appendChild(contentStatus);
         buttonAction.appendChild(contentAction);
 
         tdSchedule.appendChild(divSchedule);
-        tdStatus.appendChild(divStatus);
-        tdAction.appendChild(buttonAction);
+        tdStatus.appendChild(divStatus);        
+        if(schedules[index].status) tdAction.appendChild(buttonAction);                    
         
         tr.appendChild(tdSchedule);
         tr.appendChild(tdStatus);
@@ -81,4 +77,9 @@ async function getSchedules(date){
    })
 
    return schedules;
+}
+
+function schedule(time){
+    let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
+    window.location.href = `${baseUrl}agendar?data=${date}&horario=${time}`;
 }

@@ -8,18 +8,8 @@
 
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12 mb-3">
-                            <label for="data" class="mb-2">Data</label>
-                            <input type="date" class="form-control fw-bold bg-light" id="data" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row mb-3">
-                        <div class="form-group col-md-12 mb-3">
-                            <label for="horario" class="mb-2">Horário</label>
-                            <select id="horario" class="form-control fw-bold bg-light">
-                                <option selected disabled>Selecione um horário</option>
-                                <option>...</option>
-                            </select>
+                            <label for="data" class="mb-2">Data e Hora</label>
+                            <input type="datetime-local" class="form-control fw-bold bg-light" id="data" required>
                         </div>
                     </div>
 
