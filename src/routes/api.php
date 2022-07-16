@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SchedulingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,8 @@ Route::prefix('scheduling')->group(function () {
 
 Route::prefix('schedule')->group(function () {
     Route::get('', [ScheduleController::class, 'getSchedulesPerStatus']);
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/login', [UserController::class, 'login']);
 });
