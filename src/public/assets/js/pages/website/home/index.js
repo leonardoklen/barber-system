@@ -21,7 +21,7 @@ async function fillSchedules(){
 
     Object.keys(schedules).forEach((index) => {
         let schedule = schedules[index].schedule;
-        let status = schedules[index].status ? 'Disponível' : 'Ocupado';
+        let status = schedules[index].status ? 'Disponível' : 'Indisponível';
         let colorTextStatus = schedules[index].status ? 'text-success' : 'text-danger';
         
         let tr = document.createElement('tr');
@@ -61,7 +61,6 @@ async function fillSchedules(){
 
         document.getElementById('tbodySchedule').appendChild(tr);
     })
-    
 }
 
 function schedule(time){
