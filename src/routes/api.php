@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SchedulingController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::prefix('scheduling')->group(function () {
 
 Route::prefix('schedule')->group(function () {
     Route::get('', [ScheduleController::class, 'getSchedulesPerStatus']);
+});
+
+Route::prefix('services')->group(function () {
+    Route::get('', [ServicesController::class, 'readAll']);
 });
 
 Route::prefix('user')->group(function () {
