@@ -8,15 +8,18 @@
 
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12 mb-3">
-                            <label for="data" class="mb-2">Data e Hora</label>
-                            <input type="datetime-local" class="form-control fw-bold bg-light" id="data" required>
+                            <label for="dateTime" class="mb-2">Data e Hora</label>
+                            <select id="dateTime" class="form-control bg-light">
+                                <option selected disabled>Selecione um horário</option>
+                                <option>...</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12">
-                            <label for="servico" class="mb-2">Serviço</label>
-                            <select id="servico" class="form-control fw-bold bg-light">
+                            <label for="service" class="mb-2">Serviço</label>
+                            <select id="service" class="form-control bg-light">
                                 <option selected disabled>Selecione um serviço</option>
                                 <option>...</option>
                             </select>
@@ -25,20 +28,20 @@
 
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12">
-                            <label for="nome" class="mb-2">Nome</label>
-                            <input type="text" class="form-control fw-bold bg-light" id="nome" placeholder="Digite seu nome" required>
+                            <label for="name" class="mb-2">Nome</label>
+                            <input type="text" class="form-control bg-light" id="name" placeholder="Digite seu nome" required>
                         </div>
                     </div>
 
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12">
-                            <label for="telefone" class="mb-2">Telefone</label>
-                            <input type="text" class="form-control fw-bold bg-light" id="telefone" placeholder="Digite seu telefone" required>
+                            <label for="phone" class="mb-2">Telefone</label>
+                            <input type="text" class="form-control bg-light" id="phone" placeholder="Digite seu telefone" required>
                         </div>
                     </div>
 
                     <div class="form-group d-flex justify-content-end">
-                        <button class="btn btn-sm btn-warning" type="submit">Agendar</button>
+                        <button class="btn btn-sm btn-primary" type="submit">Agendar</button>
                     </div>
             </div>
             </form>
