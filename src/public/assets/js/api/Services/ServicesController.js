@@ -1,6 +1,6 @@
 import {Enums} from '/assets/js/Enums.js';
 
-export class Services {
+export class ServicesController {
     async get(){
         let services = {};
         await $.ajax({
