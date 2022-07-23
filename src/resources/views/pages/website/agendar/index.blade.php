@@ -20,7 +20,6 @@
                             <label for="service" class="mb-2">Serviço</label>
                             <select id="service" class="form-control bg-light">
                                 <option selected disabled>Selecione um serviço</option>
-                                <option>...</option>
                             </select>
                         </div>
                     </div>
