@@ -3,7 +3,6 @@ import {Schedules} from '/assets/js/api/Schedules.js';
 $(document).ready(function(){
     fillDateSchedule();
     fillSchedules();
-    
 });
 
 function fillDateSchedule(){
