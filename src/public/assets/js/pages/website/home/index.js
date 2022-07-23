@@ -2,7 +2,7 @@ import {Enums} from '/assets/js/Enums.js';
 import {Schedules} from '/assets/js/api/Schedules.js';  
 
 $(document).ready(function(){
-    window.schedule = schedule;
+    window.redirectSchedule = redirectSchedule;
 
     fillDateSchedule();
     fillSchedules();
@@ -48,7 +48,7 @@ async function fillSchedules(){
         divSchedule.setAttribute('class', 'text-center');
         divStatus.setAttribute('class', colorTextStatus);
         buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-primary');
-        buttonAction.setAttribute('onclick', `window.schedule("${schedule}")`);
+        buttonAction.setAttribute('onclick', `window.redirectSchedule("${schedule}")`);
 
         divSchedule.appendChild(contentSchedule);
         divStatus.appendChild(contentStatus);
@@ -66,7 +66,7 @@ async function fillSchedules(){
     })
 }
 
-export function schedule(time){
+export function redirectSchedule(time){
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
     window.location.href = `${Enums.Url}agendar?data=${date}&horario=${time}`;
 }
