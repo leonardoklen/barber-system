@@ -1,9 +1,12 @@
-import { Services } from '../../../api/Services.js';
-import { Schedules } from '../../../api/Schedules.js';
+import { Services } from '../../../api/Services/ServicesController.js';
+import { Schedules } from '../../../api/Schedules/SchedulesController.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const date = urlParams.get('data') ?? null;
 const time = urlParams.get('horario') ?? null;
+
+let schedulesApi = new Schedules();
+let servicesApi = new Services();
 
 $(document).ready(function () {
     if (date) {
@@ -11,10 +14,12 @@ $(document).ready(function () {
         fillService();
         setMaskPhone();
     }
+
+    document.getElementById('btnSchedule').addEventListener('click', schedule());
 });
 
 async function fillDateTime() {
-    let schedules = await new Schedules().get(date);
+    let schedules = await schedulesApi.get(date);
     let dateTime = document.getElementById('dateTime');
     let optionDateTimeDefault = document.getElementById('optionDateTimeDefault');
 
@@ -52,7 +57,7 @@ async function fillDateTime() {
 }
 
 async function fillService() {
-    let services = await new Services().get();
+    let services = await servicesApi.get();
     let service = document.getElementById('service');
 
     Object.keys(services).forEach((index) => {
@@ -84,4 +89,8 @@ function setMaskPhone() {
     };
 
     $('#phone').mask(maskBehavior, options);
+}
+
+function schedule(){
+
 }

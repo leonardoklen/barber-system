@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Agendar</button>
+                        <button class="btn btn-primary" id="btnSchedule" type="button">Agendar</button>
                     </div>
             </div>
             </form>
