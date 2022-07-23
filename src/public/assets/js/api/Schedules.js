@@ -1,4 +1,4 @@
-import {Enums} from '/assets/js/api/Enums.js';
+import {Enums} from '/assets/js/Enums.js';
 
 export class Schedules {
     async get(date){
