@@ -1,5 +1,4 @@
-const getUrl = window.location;
-const baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+import {Schedules} from '/assets/js/api/Schedules.js';
 
 $(document).ready(function(){
     fillDateSchedule();
@@ -19,7 +18,7 @@ function fillDateSchedule(){
 
 async function fillSchedules(){
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
-    let schedules = await getSchedules(date);
+    let schedules = await new Schedules().get(date);
 
     Object.keys(schedules).forEach((index) => {
         let schedule = schedules[index].schedule;
@@ -64,19 +63,6 @@ async function fillSchedules(){
         document.getElementById('tbodySchedule').appendChild(tr);
     })
     
-}
-
-async function getSchedules(date){
-    let schedules = {};
-    await $.ajax({
-        url : `${baseUrl}api/schedule?date=${date}`,
-        type : 'get'      
-   })
-   .done(function(response){
-        schedules = response;
-   })
-
-   return schedules;
 }
 
 function schedule(time){
