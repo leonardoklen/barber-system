@@ -10,8 +10,7 @@
                         <div class="form-group col-md-12 mb-3">
                             <label for="dateTime" class="mb-2">Data e Hora</label>
                             <select id="dateTime" class="form-control bg-light">
-                                <option selected disabled>Selecione um horário</option>
-                                <option>...</option>
+                                <option id="optionDateTimeDefault" disabled hidden>Selecione um horário</option>
                             </select>
                         </div>
                     </div>
@@ -41,7 +40,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-end">
-                        <button class="btn btn-sm btn-primary" type="submit">Agendar</button>
+                        <button class="btn btn-primary" type="submit">Agendar</button>
                     </div>
             </div>
             </form>
