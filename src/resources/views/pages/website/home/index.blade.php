@@ -21,4 +21,4 @@
 
 @include('components.website.footer')
 
-<script src="assets/js/pages/website/home/index.js"></script>
+<script src="assets/js/pages/website/home/index.js" type="module"></script>
