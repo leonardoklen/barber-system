@@ -1,12 +1,16 @@
-import { Services } from '../../../api/Services/ServicesController.js';
-import { Schedules } from '../../../api/Schedules/SchedulesController.js';
+import {Enums} from '/assets/js/Enums.js';
+import { ServicesController } from '../../../api/Services/ServicesController.js';
+import { SchedulesController } from '../../../api/Schedules/SchedulesController.js';
+import { SchedulingController } from '../../../api/Scheduling/SchedulingController.js';
+import { SchedulingDTO } from '../../../api/Scheduling/SchedulingDTO.js';
 
 const urlParams = new URLSearchParams(window.location.search);
 const date = urlParams.get('data') ?? null;
 const time = urlParams.get('horario') ?? null;
 
-let schedulesApi = new Schedules();
-let servicesApi = new Services();
+let schedulesApi = new SchedulesController();
+let servicesApi = new ServicesController();
+let schedulingApi = new SchedulingController();
 
 $(document).ready(function () {
     if (date) {
@@ -15,7 +19,7 @@ $(document).ready(function () {
         setMaskPhone();
     }
 
-    document.getElementById('btnSchedule').addEventListener('click', schedule());
+    document.getElementById('btnSchedule').addEventListener('click', toSchedule);
 });
 
 async function fillDateTime() {
@@ -91,6 +95,17 @@ function setMaskPhone() {
     $('#phone').mask(maskBehavior, options);
 }
 
-function schedule(){
+async function toSchedule(){
+    await schedulingApi.post(
+        new SchedulingDTO({
+            'dateTime': document.getElementById('dateTime').value,
+            'idService': document.getElementById('service').value,
+            'name': document.getElementById('name').value,
+            'phone': document.getElementById('phone').value
+        })
+    );
+    
+    alert('Agendamento realizado!');
 
+    window.location.href = Enums.Url
 }
