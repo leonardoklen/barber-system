@@ -1,5 +1,5 @@
 import {Enums} from '/assets/js/Enums.js';
-import {Schedules} from '/assets/js/api/Schedules.js';  
+import {SchedulesController} from '../../../api/Schedules/SchedulesController.js';  
 
 $(document).ready(function(){
     window.redirectSchedule = redirectSchedule;
@@ -20,7 +20,7 @@ function fillDateSchedule(){
 
 async function fillSchedules(){
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
-    let schedules = await new Schedules().get(date);
+    let schedules = await new SchedulesController().get(date);
 
     Object.keys(schedules).forEach((index) => {
         let schedule = schedules[index].schedule;
