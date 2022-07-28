@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Scheduling;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SchedulingController extends Controller
@@ -13,14 +14,14 @@ class SchedulingController extends Controller
         try {
             $scheduling = new Scheduling();
 
-            $scheduling->date_time = $request->date_time;
+            $scheduling->date_time = Carbon::createFromFormat('d/m/Y H:i', $request->date_time)->format('Y-m-d H:i:s');
             $scheduling->service  = $request->service;
             $scheduling->name     = $request->name;
             $scheduling->phone    = $request->phone;
 
             $scheduling->save();
 
-            return response()->json(["message" => "Agendamento criado com sucesso!"], 201);
+            return response()->json(["message" => "Agendamento criado com sucesso!"], 200);
         } catch (\Throwable $error) {
             return response()->json(["message" => "Falha ao criar agendamento: " . $error->getMessage()], 400);
         }
