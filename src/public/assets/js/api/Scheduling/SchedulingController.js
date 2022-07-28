@@ -1,20 +1,25 @@
-import {Enums} from '/assets/js/Enums.js';
+import { SchedulingDTO } from './SchedulingDTO.js';
+import { Enums } from '/assets/js/Enums.js';
 
 export class SchedulingController {
-    async post(schedulingEntity){
-        if(typeof schedulingEntity !== 'SchedulingEntity') {
-            throw 'O método "post" espera receber um parâmetro do tipo "SchedulingEntity"';
-        }
 
-        let schedules = {};
+    /**
+     * 
+     * @param {SchedulingDTO} schedulingDTO 
+     * @returns 
+     */
+    async post(schedulingDTO) {
         await $.ajax({
-            url : `${Enums.Url}api/schedule?date=${date}`,
-            type : 'get'      
-       })
-       .done(function(response){
-            schedules = response;
-       })
-    
-       return schedules;
+            url: `${Enums.Url}api/scheduling`,
+            type: 'post',
+            data: {
+                'date_time': schedulingDTO.getDateTime(),
+                'service': schedulingDTO.getIdService(),
+                'name': schedulingDTO.getName(),
+                'phone': schedulingDTO.getPhone()
+            },
+        }).fail(function () {
+            alert('Erro ao agendar horário.');
+        });
     }
 }
