@@ -1,4 +1,4 @@
-export class SchedulingEntity {
+export class SchedulingDTO {
     dateTime;
     idService;
     name;
