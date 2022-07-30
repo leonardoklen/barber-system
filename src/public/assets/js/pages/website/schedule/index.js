@@ -8,16 +8,16 @@ const urlParams = new URLSearchParams(window.location.search);
 const date = urlParams.get('data') ?? null;
 const time = urlParams.get('horario') ?? null;
 
-let schedulesApi = new SchedulesController();
-let servicesApi = new ServicesController();
-let schedulingApi = new SchedulingController();
+const schedulesApi = new SchedulesController();
+const servicesApi = new ServicesController();
+const schedulingApi = new SchedulingController();
 
 $(document).ready(function () {
     if (date) {
         fillDateTime();
         fillService();
         setMaskPhone();
-    }
+    }    
 
     document.getElementById('btnSchedule').addEventListener('click', toSchedule);
 });
@@ -89,13 +89,21 @@ function setMaskPhone() {
     let options = {
         onKeyPress: function (val, e, field, options) {
             field.mask(maskBehavior.apply({}, arguments), options);
-        }
+        },
+        clearIfNotMatch: true
     };
 
     $('#phone').mask(maskBehavior, options);
 }
 
 async function toSchedule(){
+    const formSchedule = document.getElementById('formSchedule'); 
+
+    if(!formSchedule.checkValidity()){
+        formSchedule.reportValidity();
+        return;
+    }
+
     await schedulingApi.post(
         new SchedulingDTO({
             'dateTime': document.getElementById('dateTime').value,
