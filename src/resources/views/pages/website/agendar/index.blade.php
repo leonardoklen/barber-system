@@ -47,8 +47,6 @@
     </div>
 </div>
 
-@include('components.website.btn-whatsapp')
-
 @include('components.website.footer')
 
 <script src="assets/js/pages/website/schedule/index.js" type="module"></script>
