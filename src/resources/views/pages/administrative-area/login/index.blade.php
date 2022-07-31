@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-br" class="login-height">
-
 @extends('components.head')
 @section('title', 'Entrar')
 
@@ -24,10 +21,10 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+                                            <input type="email" class="form-control form-control-user" id="emailLogin" aria-describedby="emailHelp" placeholder="E-mail">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
+                                            <input type="password" class="form-control form-control-user" id="passwordLogin" placeholder="Senha">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -35,7 +32,7 @@
                                                 <label class="custom-control-label" for="customCheck">Lembrar-me</label>
                                             </div>
                                         </div>
-                                        <a href="agendamentos" class="btn btn-primary btn-user btn-block">
+                                        <a type="none" id="btnLogin" class="btn btn-primary btn-user btn-block">
                                             Entrar
                                         </a>
                                     </form>
@@ -55,4 +52,6 @@
 
 </body>
 
-</html>
+@extends('components.footer')
+
+<script src="assets/js/pages/login/index.js" type="module"></script>
