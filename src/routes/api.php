@@ -35,4 +35,5 @@ Route::prefix('services')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::get('/login', [UserController::class, 'login']);
+    Route::get('/sessionDestroy', [UserController::class, 'sessionDestroy']);
 });
