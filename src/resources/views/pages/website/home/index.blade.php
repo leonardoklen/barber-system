@@ -1,6 +1,9 @@
 @include('components.website.head')
 
-<div class="container align-self-center mt-3 mb-3">
+<div class="container align-self-center mb-3 bg-light">
+    <div class="text-center">
+        <img class="w-50 h-50 mt-3 mb-3" src="assets/img/logo.jfif" alt="">
+    </div>
     <div class="card shadow mb-3">
         <table class="table table-striped mb-0">
             <thead>
