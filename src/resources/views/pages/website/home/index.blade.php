@@ -1,19 +1,30 @@
 @include('components.website.head')
 
 <div class="container align-self-center mt-3 mb-3">
-    <div class="card shadow mb-5">
+    <div class="card shadow mb-3">
         <table class="table table-striped mb-0">
             <thead>
                 <td colspan="3">
-                    <div class="d-flex justify-content-between">
-                        <div class="fw-bold">Agenda</div>
-                        <div class="fst-italic" id="dateSchedule"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <button type="button" class="btn btn-sm btn-dark d-none" id="btnPreviousDate"><</button>
+                        </div>
+                        <div class="fst-italic fw-bold" id="dateSchedule"></div>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-dark" id="btnNextDate">></button>
+                        </div>
                     </div>
                 </td>
             </thead>
             <tbody id="tbodySchedule">
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="text-center d-none" id="spinner">
+    <div class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>
 

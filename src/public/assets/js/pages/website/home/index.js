@@ -1,24 +1,30 @@
-import {Enums} from '/assets/js/Enums.js';
-import {SchedulesController} from '../../../api/Schedules/SchedulesController.js';  
+import { Enums } from '/assets/js/Enums.js';
+import { SchedulesController } from '../../../api/Schedules/SchedulesController.js';
 
-$(document).ready(function(){
+$(document).ready(function () {
     window.redirectSchedule = redirectSchedule;
 
     fillDateSchedule();
     fillSchedules();
+
+    document.getElementById('btnNextDate').addEventListener('click', setNextDate);
+    document.getElementById('btnPreviousDate').addEventListener('click', setPreviousDate);
 });
 
-function fillDateSchedule(){
-    let today = new Date(Date.now());
-    let date = today.toLocaleDateString();
+function fillDateSchedule(date = null) {
+    let fullDate = date ? date : new Date(Date.now());
 
     let daysOfTheWeek = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
-    let day = daysOfTheWeek[today.getDay()];
+    let day = daysOfTheWeek[fullDate.getDay()];
 
-    document.getElementById('dateSchedule').innerHTML = `${day} ${date}`;
+    document.getElementById('dateSchedule').innerHTML = `${day} ${fullDate.toLocaleDateString()}`;
 }
 
-async function fillSchedules(){
+async function fillSchedules() {
+    showSpinner();
+
+    monitorButtonPreviousDate();
+
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
     let schedules = await new SchedulesController().get(date);
 
@@ -26,7 +32,7 @@ async function fillSchedules(){
         let schedule = schedules[index].schedule;
         let status = schedules[index].status ? 'Disponível' : 'Indisponível';
         let colorTextStatus = schedules[index].status ? 'text-success' : 'text-danger';
-        
+
         let tr = document.createElement('tr');
         let tdSchedule = document.createElement('td');
         let tdStatus = document.createElement('td');
@@ -47,7 +53,7 @@ async function fillSchedules(){
         tdAction.setAttribute('width', '20%');
         divSchedule.setAttribute('class', 'text-center');
         divStatus.setAttribute('class', colorTextStatus);
-        buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-primary');
+        buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-dark');
         buttonAction.setAttribute('onclick', `window.redirectSchedule("${schedule}")`);
 
         divSchedule.appendChild(contentSchedule);
@@ -55,18 +61,105 @@ async function fillSchedules(){
         buttonAction.appendChild(contentAction);
 
         tdSchedule.appendChild(divSchedule);
-        tdStatus.appendChild(divStatus);        
-        if(schedules[index].status) tdAction.appendChild(buttonAction);                    
-        
+        tdStatus.appendChild(divStatus);
+        if (schedules[index].status) tdAction.appendChild(buttonAction);
+
         tr.appendChild(tdSchedule);
         tr.appendChild(tdStatus);
         tr.appendChild(tdAction);
 
         document.getElementById('tbodySchedule').appendChild(tr);
     })
+
+    hideSpinner();
 }
 
-export function redirectSchedule(time){
+export function redirectSchedule(time) {
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
     window.location.href = `${Enums.Url}agendar?data=${date}&horario=${time}`;
+}
+
+async function setNextDate() {
+    disableButtons();
+
+    await fillDateSchedule(getNextDate());
+
+    document.getElementById('tbodySchedule').innerHTML = '';
+
+    await fillSchedules();
+
+    activateButtons();
+}
+
+function getNextDate() {
+    let dateSchedule = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
+    let dateScheduleFormated = dateSchedule.split('/').reverse().join('-');
+
+    let date = new Date(dateScheduleFormated);
+    date.setDate(date.getDate() + 2);
+
+    return date;
+}
+
+async function setPreviousDate() {
+    disableButtons();
+
+    await fillDateSchedule(getPreviousDate());
+
+    document.getElementById('tbodySchedule').innerHTML = '';
+
+    await fillSchedules();
+
+    activateButtons();
+}
+
+function getPreviousDate() {
+    let dateSchedule = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
+    let dateScheduleFormated = dateSchedule.split('/').reverse().join('-');
+
+    let date = new Date(dateScheduleFormated);
+    date.setDate(date.getDate());
+
+    return date;
+}
+
+function activateButtons() {
+    document.getElementById('btnNextDate').removeAttribute('disabled');
+    document.getElementById('btnPreviousDate').removeAttribute('disabled');
+}
+
+function disableButtons(id) {
+    document.getElementById('btnNextDate').setAttribute('disabled', true);
+    document.getElementById('btnPreviousDate').setAttribute('disabled', true);
+}
+
+function showSpinner() {
+    document.getElementById('spinner').classList.remove("d-none");
+    document.getElementById('spinner').classList.add("d-block");
+}
+
+function hideSpinner() {
+    document.getElementById('spinner').classList.remove("d-block");
+    document.getElementById('spinner').classList.add("d-none");
+}
+
+function monitorButtonPreviousDate() {
+    let btnPreviousDate = document.getElementById('btnPreviousDate');
+
+    let dateSchedule = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
+    let dateScheduleFormated = dateSchedule.split('/').reverse().join('-');
+
+    dateSchedule = new Date(dateScheduleFormated);
+    dateSchedule.setDate(dateSchedule.getDate() + 1);
+    console.log(dateSchedule);
+
+    let today = new Date(Date.now());
+
+    if (dateSchedule.getDate() <= today.getDate() && dateSchedule.getMonth() <= today.getMonth() && dateSchedule.getYear() <= today.getYear()) {
+        btnPreviousDate.classList.add("d-none");
+        btnPreviousDate.classList.remove("d-block");
+    } else {
+        btnPreviousDate.classList.add("d-block");
+        btnPreviousDate.classList.remove("d-none");
+    }
 }
