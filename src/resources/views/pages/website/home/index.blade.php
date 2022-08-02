@@ -1,8 +1,10 @@
 @include('components.website.head')
 
-<div class="container align-self-center mb-3 bg-light">
+<link href="assets/css/pages/website/home/index.css" rel="stylesheet" type="text/css" />
+
+<div class="container align-self-center mb-3">
     <div class="text-center">
-        <img class="w-50 h-50 mt-3 mb-3" src="assets/img/logo.jfif" alt="">
+        <img class="img-fluid mt-3 mb-3 img-width" src="assets/img/logo.jfif" alt="">
     </div>
     <div class="card shadow mb-3">
         <table class="table table-striped mb-0">
