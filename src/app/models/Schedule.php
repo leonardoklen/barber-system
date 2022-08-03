@@ -9,5 +9,5 @@ class Schedule extends Model
 {
     use HasFactory;
     protected $table = 'schedule' ;
-    protected $fillable = ['schedules', 'active'];
+    protected $fillable = ['day_number', 'schedules', 'active'];
 }
