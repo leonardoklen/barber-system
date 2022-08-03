@@ -2,9 +2,9 @@
 
 <link href="assets/css/pages/website/home/index.css" rel="stylesheet" type="text/css" />
 
-<div class="container align-self-center mb-3">
-    <div class="text-center">
-        <img class="img-fluid mt-3 mb-3 img-width" src="assets/img/logo.jfif" alt="">
+<div class="container align-self-center mt-3">
+    <div class="text-center mb-3">
+        <img class="img-fluidimg-width" src="assets/img/logo.jfif" alt="">
     </div>
     <div class="card shadow mb-3">
         <table class="table table-striped mb-0">
