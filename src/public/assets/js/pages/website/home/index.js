@@ -28,6 +28,29 @@ async function fillSchedules() {
     let date = document.getElementById('dateSchedule').innerHTML.split(" ")[1];
     let schedules = await new SchedulesController().get(date);
 
+    let schedulesIsEmpty = Object.keys(schedules).length === 0;
+    if(schedulesIsEmpty){
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let icon = document.createElement('icon');
+
+        let content = document.createTextNode(' Não há horários disponíveis para esse dia.')
+
+        td.setAttribute('colspan', 3);
+        td.setAttribute('class', 'text-center');
+        icon.setAttribute('class', 'bi bi-info-circle');
+
+        td.appendChild(icon);
+        td.appendChild(content);
+        tr.appendChild(td);
+        
+        document.getElementById('tbodySchedule').appendChild(tr);
+
+        hideSpinner();
+
+        return;
+    }
+
     Object.keys(schedules).forEach((index) => {
         let schedule = schedules[index].schedule;
         let status = schedules[index].status ? 'Disponível' : 'Indisponível';
@@ -151,7 +174,6 @@ function monitorButtonPreviousDate() {
 
     dateSchedule = new Date(dateScheduleFormated);
     dateSchedule.setDate(dateSchedule.getDate() + 1);
-    console.log(dateSchedule);
 
     let today = new Date(Date.now());
 
