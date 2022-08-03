@@ -1,3 +1,9 @@
+<footer class="footer mt-5">
+    <div class="text-center text-muted">
+        Desenvolvido por SK Sistemas
+    </div>
+</footer>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
