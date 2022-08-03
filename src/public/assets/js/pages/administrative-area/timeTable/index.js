@@ -51,23 +51,29 @@ async function filterData(date) {
 async function buildTable(date) {
     let data = await filterData(date);
 
-    $('form').after('<table class="table table-hover table-sm"></table>');
-    $('table').append('<thead></thead>');
-    $('thead').append('<tr></tr>');
-    $('tr').append('<th scope="col"><small>Horário</small></th>');
-    $('tr').append('<th scope="col"><small>Nome</small></th>');
-    $('tr').append('<th scope="col"><small>Serviço</small></th>');
-    $('tr').append('<th scope="col"><small>Telefone</small></th>');
-    $('tr').append('<th scope="col"><small>Ação</small></th>');
-    $('thead').after('<tbody></tbody>');
-    await data.forEach(function (element, index) {
-        $('tbody').append(`<tr id="lineBody${index}"></tr>`);
-        $(`#lineBody${index}`).append(`<td><small>${element['date_time'].substring(11, 16)}</small></td>`);
-        $(`#lineBody${index}`).append(`<td><small>${element['name']}</small></td>`);
-        $(`#lineBody${index}`).append(`<td><small>${element['service']}</small></td>`);
-        $(`#lineBody${index}`).append(`<td><small>${element['phone']}</small></td>`);
-        $(`#lineBody${index}`).append(`<td><button value="${element['id']}" class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${element['name']}">Excluir</td>`);
-    })
+    if (data.length != 0) {
+        $('form').after('<table class="table table-hover table-sm table-bordered" style="border-collapse: separate; border-spacing: 0; border-radius: 5px; -moz-border-radius: 5px;"></table>');
+        $('table').append('<thead style="background-color:#4e73df; color: white;"></thead>');
+        $('thead').append('<tr></tr>');
+        $('tr').append('<th scope="col"><small><b>Horário</b></small></th>');
+        $('tr').append('<th scope="col"><small><b>Nome</b></small></th>');
+        $('tr').append('<th scope="col"><small><b>Serviço</b></small></th>');
+        $('tr').append('<th scope="col"><small><b>Telefone</b></small></th>');
+        $('tr').append('<th scope="col"><small><b>Ação</b></small></th>');
+        $('thead').after('<tbody></tbody>');
+        await data.forEach(function (element, index) {
+            $('tbody').append(`<tr id="lineBody${index}"></tr>`);
+            $(`#lineBody${index}`).append(`<td><small>${element['date_time'].substring(11, 16)}</small></td>`);
+            $(`#lineBody${index}`).append(`<td><small>${element['name']}</small></td>`);
+            $(`#lineBody${index}`).append(`<td><small>${element['service']}</small></td>`);
+            $(`#lineBody${index}`).append(`<td><small>${element['phone']}</small></td>`);
+            $(`#lineBody${index}`).append(`<td><button value="${element['id']}" class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${element['name']}">Excluir</td>`);
+        })
+    } else {
+        $('form').after('<div class="alert alert-primary" role="alert">Sem agendamentos para este dia até o momento!</div>');
+    }
+
+
 }
 
 function insertIDModal(id, name) {
@@ -89,8 +95,13 @@ function eventBtnDelete() {
 
 function eventFilterBtn() {
     $('#filterBtn').on('click', async function () {
-        $('table').remove();
+        $('#filterBtn').addClass('disabled');
+        await $('.alert').remove();
+        await $('table').remove();
+        $('form').after('<a class="spinner-border text-primary" role="status"></a>');
         await buildTable($('#inputDate').val());
+        $('.spinner-border').remove();
+        $('#filterBtn').removeClass('disabled');
         eventBtnDelete();
     });
 
@@ -119,7 +130,7 @@ async function deleteScheduling(id) {
 function eventBtnConfirm() {
     $('.btnConfirm').on('click', async function (element) {
         await deleteScheduling(element.target.value);
-       document.location.reload();
+        document.location.reload();
     });
 
 }
