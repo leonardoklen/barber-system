@@ -1,11 +1,11 @@
 @include('components.website.head')
 
-<div class="container align-self-center mt-3 mb-3">
+<div class="container align-self-center mt-3">
     <div class="row">
         <div class="col-md-12">
+            <h3 class="text-center mb-3">Agendar um Horário</h3>
             <div class="card shadow">
                 <form id="formSchedule" class="mt-4 mb-4 ms-4 me-4">
-
                     <div class="form-row mb-3">
                         <div class="form-group col-md-12 mb-3">
                             <label for="dateTime" class="mb-2">Data e Hora</label>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-end">
-                        <button class="btn btn-primary" id="btnSchedule" type="button">Agendar</button>
+                        <button class="btn btn-dark" id="btnSchedule" type="button">Agendar</button>
                     </div>
             </div>
             </form>
