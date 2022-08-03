@@ -19,7 +19,8 @@ $(document).ready(function () {
         setMaskPhone();
     }    
 
-    document.getElementById('btnSchedule').addEventListener('click', toSchedule);
+    document.getElementById('btnSchedule').addEventListener('click', toSchedule);   
+    document.getElementById('btnOkModal').addEventListener('click', redirectHome); 
 });
 
 async function fillDateTime() {
@@ -96,13 +97,15 @@ function setMaskPhone() {
     $('#phone').mask(maskBehavior, options);
 }
 
-async function toSchedule(){
+async function toSchedule(){    
     const formSchedule = document.getElementById('formSchedule'); 
 
     if(!formSchedule.checkValidity()){
         formSchedule.reportValidity();
         return;
     }
+
+    activateLoadingBtnSchedule();
 
     await schedulingApi.post(
         new SchedulingDTO({
@@ -113,7 +116,19 @@ async function toSchedule(){
         })
     );
     
-    alert('Agendamento realizado!');
+    disableLoadingBtnSchedule();
 
+    $('#modalSuccess').modal('show'); 
+}
+
+function activateLoadingBtnSchedule(){
+    document.getElementById('btnSchedule').innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...';
+}
+
+function disableLoadingBtnSchedule(){
+    document.getElementById('btnSchedule').innerHTML = 'Agendar';
+}
+
+function redirectHome(){
     window.location.href = Enums.Url
 }
