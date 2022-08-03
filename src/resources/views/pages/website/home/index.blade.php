@@ -4,7 +4,7 @@
 
 <div class="container align-self-center mt-3">
     <div class="text-center mb-3">
-        <img class="img-fluidimg-width" src="assets/img/logo.jfif" alt="">
+        <img class="img-fluid img-width" src="assets/img/logo.jfif" alt="">
     </div>
     <div class="card shadow mb-3">
         <table class="table table-striped mb-0">
