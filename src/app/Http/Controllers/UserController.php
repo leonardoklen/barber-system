@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-session_start();
+
 
 class UserController extends Controller
 {
@@ -27,10 +27,12 @@ class UserController extends Controller
 
     public function initSession($userName)
     {
+        session_start();
         $_SESSION['userName'] = $userName;
     }
 
     public function sessionDestroy() {
+        session_start();
         session_destroy();
     }
 
