@@ -22,13 +22,13 @@ Route::get('/agendar', function () {
 });
 
 Route::get('/entrar', function () {
-    return view('pages.administrative-area.login.index');
+    return view('pages.admin.login.index');
 });
 
 Route::get('/esqueceu-senha', function () {
-    return view('pages.administrative-area.forgot-password.index');
+    return view('pages.admin.forgot-password.index');
 });
 
 Route::get('/inicio', function () {
-    return view('pages.administrative-area.home.index');
+    return view('pages.admin.home.index');
 });
