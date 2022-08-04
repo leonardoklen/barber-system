@@ -1,6 +1,6 @@
 @include('components.website.head')
 
-<link href="assets/css/pages/website/home/index.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/pages/website/home/index.css" rel="stylesheet" type="text/css"/>
 
 <div class="container align-self-center mt-3">
     <div class="text-center mb-3">

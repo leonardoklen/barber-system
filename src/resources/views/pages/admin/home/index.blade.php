@@ -6,8 +6,6 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        @include('components.admin.menu')
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -69,8 +67,6 @@
             </div>
             <!-- End of Main Content -->
 
-            @include('components.admin.footer')
-
         </div>
         <!-- End of Content Wrapper -->
 
@@ -98,8 +94,8 @@
             </div>
         </div>
     </div>
-
-    @include('components.admin.scripts')
 </body>
+
+@include('components.admin.footer')
 
 <script src="assets/js/pages/admin/home/index.js" type="module"></script>
