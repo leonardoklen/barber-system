@@ -14,7 +14,7 @@ export class SchedulingController {
             type: 'post',
             data: {
                 'date_time': schedulingDTO.getDateTime(),
-                'service': schedulingDTO.getIdService(),
+                'id_service': schedulingDTO.getIdService(),
                 'name': schedulingDTO.getName(),
                 'phone': schedulingDTO.getPhone()
             },

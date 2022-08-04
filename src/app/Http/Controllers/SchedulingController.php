@@ -15,7 +15,7 @@ class SchedulingController extends Controller
             $scheduling = new Scheduling();
 
             $scheduling->date_time = Carbon::createFromFormat('d/m/Y H:i', $request->date_time)->format('Y-m-d H:i:s');
-            $scheduling->service  = $request->service;
+            $scheduling->id_service  = $request->id_service;
             $scheduling->name     = $request->name;
             $scheduling->phone    = $request->phone;
 
@@ -56,7 +56,7 @@ class SchedulingController extends Controller
 
             if (!empty($scheduling)) {
                 $scheduling->date_time = is_null($request->date_time) ? $scheduling->date_time : $request->date_time;
-                $scheduling->service  = is_null($request->service)  ? $scheduling->service  : $request->service;
+                $scheduling->id_service  = is_null($request->id_service)  ? $scheduling->id_service  : $request->id_service;
                 $scheduling->name     = is_null($request->name)     ? $scheduling->name     : $request->name;
                 $scheduling->phone    = is_null($request->phone)    ? $scheduling->phone    : $request->phone;
 

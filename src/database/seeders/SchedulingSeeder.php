@@ -18,7 +18,7 @@ class SchedulingSeeder extends Seeder
         for ($i=0; $i < 20; $i++) { 
             Scheduling::create([
                 'datetime' => $faker->dateTime('now'), 
-                'service' => $faker->word(), 
+                'id_service' => $faker->word(), 
                 'name' => $faker->name(), 
                 'phone' => $faker->tollFreePhoneNumber()
             ]);
