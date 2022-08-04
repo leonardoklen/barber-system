@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('scheduling', function (Blueprint $table) {
             $table->id();
             $table->datetime('date_time')->unique();
-            $table->foreign('id_service')->references('id')->on('services');
+            $table->unsignedBigInteger('id_service');
             $table->string('name');
             $table->string('phone');
             $table->timestamps();
+
+            $table->foreign('id_service')->references('id')->on('services');
         });
     }
 
