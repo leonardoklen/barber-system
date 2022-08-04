@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DayOff;
 use App\Models\Schedule;
 use App\Models\Scheduling;
 use Carbon\Carbon;
@@ -15,20 +16,28 @@ class ScheduleController extends Controller
         try {
             $inputDateCarbon = Carbon::createFromFormat('d/m/Y', $request->query('date'));
             $inputDateString = $inputDateCarbon->format('Y-m-d');
-            $dayNumber = $inputDateCarbon->dayOfWeek;
+
+            $isDayOff = DayOff::where('date', '=', $inputDateString)->exists();
+
+            if ($isDayOff) {
+                return response()->json([]);
+            }
 
             $dateInitial = $inputDateString . ' 00:00:00';
             $dateFinal = $inputDateString . ' 23:59:59';
 
             $schedulings = Scheduling::whereBetween('date_time', [$dateInitial, $dateFinal])->get();
-            $schedules = json_decode(Schedule::where('day_number', '=', $dayNumber)->where('status', '=', true)->first()->getAttributes()['schedules'], true);            
+
+            $dayNumber = $inputDateCarbon->dayOfWeek;
+
+            $schedules = json_decode(Schedule::where('day_number', '=', $dayNumber)->where('status', '=', true)->first()->getAttributes()['schedules'], true);
 
             $retorno = [];
             $status = true;
 
-            foreach($schedules as $schedule) {                
-                foreach($schedulings as $scheduling) {
-                    if(Carbon::createFromFormat('Y-m-d H:i:s', $scheduling['date_time'])->format('H:i') === $schedule) {
+            foreach ($schedules as $schedule) {
+                foreach ($schedulings as $scheduling) {
+                    if (Carbon::createFromFormat('Y-m-d H:i:s', $scheduling['date_time'])->format('H:i') === $schedule) {
                         $status = false;
                     }
                 }
