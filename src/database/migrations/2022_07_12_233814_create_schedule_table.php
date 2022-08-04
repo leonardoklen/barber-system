@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('schedule', function (Blueprint $table) {
             $table->id();
+            $table->string('day_number');
             $table->json('schedules');
             $table->boolean('status');
             $table->timestamps();

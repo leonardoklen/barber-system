@@ -13,13 +13,15 @@ class ScheduleController extends Controller
     public function getSchedulesPerStatus(Request $request)
     {
         try {
-            $inputDate = Carbon::createFromFormat('d/m/Y', $request->query('date'))->format('Y-m-d');
+            $inputDateCarbon = Carbon::createFromFormat('d/m/Y', $request->query('date'));
+            $inputDateString = $inputDateCarbon->format('Y-m-d');
+            $dayNumber = $inputDateCarbon->dayOfWeek;
 
-            $dateInitial = $inputDate . ' 00:00:00';
-            $dateFinal = $inputDate . ' 23:59:59';
+            $dateInitial = $inputDateString . ' 00:00:00';
+            $dateFinal = $inputDateString . ' 23:59:59';
 
             $schedulings = Scheduling::whereBetween('date_time', [$dateInitial, $dateFinal])->get();
-            $schedules = json_decode(Schedule::where('status', '=', true)->first()->getAttributes()['schedules'], true);            
+            $schedules = json_decode(Schedule::where('day_number', '=', $dayNumber)->where('status', '=', true)->first()->getAttributes()['schedules'], true);            
 
             $retorno = [];
             $status = true;
