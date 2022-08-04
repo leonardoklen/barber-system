@@ -25,13 +25,13 @@ date_default_timezone_set('America/Sao_Paulo');
 
     <nav class="navbar navbar-dark bg-dark shadow">
       <div class="container-fluid text-center justify-content-center">
-        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="#">
+        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="https://www.instagram.com/dione_barbeariaqueiroz/" target="_blank">
             <i class="bi bi-instagram"></i>
         </a>
-        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="#">
+        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="https://www.facebook.com/Barbearia-Queiroz-111524203551860" target="_blank">
             <i class="bi bi-facebook"></i>
         </a>
-        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="#">
+        <a class="navbar-brand m-0 ms-2 me-2 fs-2" href="https://api.whatsapp.com/send?1=pt_BR&phone=5544998208262" target="_blank">
             <i class="bi bi-whatsapp"></i>
         </a>
       </div>
