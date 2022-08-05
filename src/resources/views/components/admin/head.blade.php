@@ -35,7 +35,7 @@ UserController::checkIfSessionExists($_SERVER['REQUEST_URI']);
             </div>
             <div class="d-flex align-items-center">
                 <div class="btn-group">
-                    <button type="button" class="d-flex align-items-center btn text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="d-flex align-items-center btn text-white border-0 p-0" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle fs-4 me-1"></i> @php echo $_SESSION['userName']; @endphp
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
