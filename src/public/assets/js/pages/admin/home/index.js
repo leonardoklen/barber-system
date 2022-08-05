@@ -52,7 +52,7 @@ async function buildTable(date) {
     let data = await filterData(date);
 
     if (data.length != 0) {
-        $('form').after('<table class="table table-hover table-sm table-bordered" style="border-collapse: separate; border-spacing: 0; border-radius: 5px; -moz-border-radius: 5px;"></table>');
+        $('#formHorarios').after('<table class="table table-hover table-sm table-bordered" style="border-collapse: separate; border-spacing: 0; border-radius: 5px; -moz-border-radius: 5px;"></table>');
         $('table').append('<thead style="background-color:#4e73df; color: white;"></thead>');
         $('thead').append('<tr></tr>');
         $('tr').append('<th scope="col"><small><b>Horário</b></small></th>');
