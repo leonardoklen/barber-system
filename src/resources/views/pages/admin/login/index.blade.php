@@ -48,9 +48,9 @@
                                  </div>   
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <a type="button" id="btnLogin" class="btn btn-primary btn-user btn-block">
+                                <button type="button" id="btnLogin" class="btn btn-primary btn-user btn-block">
                                     Entrar
-                                </a>
+                                </button>
                             </div>
                         </form>                                                         
                     </div>
