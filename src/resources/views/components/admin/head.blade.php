@@ -68,3 +68,6 @@ UserController::checkIfSessionExists($_SERVER['REQUEST_URI']);
             </div>
         </div>
     </nav>
+
+    <div class="bg-white div-content rounded shadow-lg">
+    

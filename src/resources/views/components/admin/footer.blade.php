@@ -1,3 +1,5 @@
+</div>
+
 <footer class="footer mt-5">
     <div class="copyright text-center my-auto text-muted">
             <span>Copyright &copy; Barber System @php echo date('Y'); @endphp</span>
