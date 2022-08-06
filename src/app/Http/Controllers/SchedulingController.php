@@ -49,6 +49,22 @@ class SchedulingController extends Controller
         }
     }
 
+    public function readAllPerDate($date)
+    {
+        try {
+            $dateInitial = "$date 00:00:00";
+            $dateFinal = "$date 23:59:00";
+            $schedulings = Scheduling::select('scheduling.id', 'scheduling.date_time', 'scheduling.name', 'scheduling.phone', 'services.description as service')
+                ->join('services', 'scheduling.id_service', '=', 'services.id')
+                ->whereBetween('date_time', [$dateInitial, $dateFinal])                
+                ->get();
+
+            return response()->json($schedulings, 200);
+        } catch (\Throwable $error) {
+            return response()->json(["message" => "Falha ao buscar agendamentos: " . $error->getMessage()], 500);
+        }
+    }
+
     public function update(Request $request, $id)
     {
         try {
