@@ -21,14 +21,16 @@ Route::get('/agendar', function () {
     return view('pages.website.agendar.index');
 });
 
-Route::get('/entrar', function () {
-    return view('pages.admin.login.index');
-});
+Route::prefix('admin')->group(function () {
+    Route::get('/entrar', function () {
+        return view('pages.admin.login.index');
+    });
 
-Route::get('/esqueceu-senha', function () {
-    return view('pages.admin.forgot-password.index');
-});
+    Route::get('/esqueceu-senha', function () {
+        return view('pages.admin.forgot-password.index');
+    });
 
-Route::get('/inicio', function () {
-    return view('pages.admin.home.index');
+    Route::get('/inicio', function () {
+        return view('pages.admin.home.index');
+    });
 });
