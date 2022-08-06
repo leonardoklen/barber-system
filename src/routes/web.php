@@ -22,7 +22,7 @@ Route::get('/agendar', function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('/entrar', function () {
+    Route::get('', function () {
         return view('pages.admin.login.index');
     });
 
@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function () {
         return view('pages.admin.forgot-password.index');
     });
 
-    Route::get('/inicio', function () {
-        return view('pages.admin.home.index');
+    Route::get('/agendamentos', function () {
+        return view('pages.admin.scheduling.index');
     });
 });

@@ -31,4 +31,4 @@
 
 @include('components.admin.footer')
 
-<script src="../assets/js/pages/admin/home/index.js" type="module"></script>
+<script src="../assets/js/pages/admin/scheduling/index.js" type="module"></script>

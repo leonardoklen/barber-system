@@ -14,7 +14,7 @@ async function login() {
     let email = $('#emailLogin').val();
     let password = $('#passwordLogin').val();
 
-    loginIsValid(email, password) ? await callAPI(email, password) ? window.location.href = `${Enums.Url}admin/inicio` : showAlert('danger', 'Usuário ou senha incorretos!') : showAlert('warning', 'Preencha todos os campos!');
+    loginIsValid(email, password) ? await callAPI(email, password) ? window.location.href = `${Enums.Url}admin/agendamentos` : showAlert('danger', 'Usuário ou senha incorretos!') : showAlert('warning', 'Preencha todos os campos!');
 
 }
 
