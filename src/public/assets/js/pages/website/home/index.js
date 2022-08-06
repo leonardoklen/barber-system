@@ -80,7 +80,7 @@ async function fillSchedules() {
         tdAction.setAttribute('width', '20%');
         divSchedule.setAttribute('class', 'text-center');
         divStatus.setAttribute('class', colorTextStatus);
-        buttonAction.setAttribute('class', 'btn btn-sm btn-sm btn-dark');
+        buttonAction.setAttribute('class', 'btn btn-sm btn-dark');
         buttonAction.setAttribute('onclick', `window.redirectSchedule("${schedule}")`);
 
         divSchedule.appendChild(contentSchedule);
