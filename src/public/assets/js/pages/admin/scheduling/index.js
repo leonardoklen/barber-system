@@ -1,136 +1,156 @@
-import {
-    Enums
-} from '/assets/js/Enums.js';
+import { SchedulingController } from '../../../api/Scheduling/SchedulingController.js';
+
+const schedulingApi = new SchedulingController();
 
 $(document).ready(async function () {
-    $('#inputDate').val(getDate())
+    window.openModalDeleteScheduling = openModalDeleteScheduling;
+    window.deleteScheduling = deleteScheduling;
 
-    eventFilterBtn();
-    await buildTable(getDate());
-    eventBtnDelete();
-    eventBtnCloseModal();
-    eventBtnConfirm();
+    activateLoadingBtnFilter();
 
+    let today = getToday();
+
+    document.getElementById('inputDate').value = today;
+
+    let schedulings = await schedulingApi.getPerDate(today);
+
+    let columns = getObjectColumns();
+    let rows = createObjectRows(schedulings);    
+
+    createFooTable(columns, rows);
+
+    disableLoadingBtnFilter();
+
+    document.getElementById('btnFilter').addEventListener('click', updateTable);   
 });
 
-function getDate() {
-    let date = new Date();
-    let day = date.getDate().toString();
-    let dayFormatted = (day.length == 1) ? '0' + day : day;
-    let month = (date.getMonth() + 1).toString();
-    let monthFormatted = (month.length == 1) ? '0' + month : month;
-    let year = date.getFullYear();
+function createObjectRows(schedulings){    
+    let rows = [];
 
-    return `${year}-${monthFormatted}-${dayFormatted}`;
-}
+    Object.keys(schedulings).forEach((index) => {
+        let id = schedulings[index].id;
+        let schedule = schedulings[index].date_time.split(" ")[1];
+        schedule = schedule.substring(0, schedule.length - 3)
+        let name = schedulings[index].name;
+        let service = schedulings[index].service;
+        let phone = schedulings[index].phone;
 
-async function getFilledSchedules() {
-    let result;
-
-    await $.ajax({
-            url: `${Enums.Url}api/scheduling/`,
-            type: 'get'
-        })
-        .done(function (response) {
-            result = response;
-        })
-
-    return result;
-}
-
-async function filterData(date) {
-    let data = await getFilledSchedules();
-
-    let filter = await data.filter(object => {
-        return object.date_time.substring(0, 10) == date;
+        rows.push({
+            "options": {
+                "classes": "align-middle"
+            },
+            "value": {           
+                "schedule": schedule, 
+                "name": name, 
+                "service": service, 
+                "phone": phone, 
+                "action": `<button class="btn btn-sm btn-danger" onclick=window.openModalDeleteScheduling(${id})>Excluir</button>`
+            }
+        }); 
     })
 
-    return filter;
+    return rows;
 }
 
-async function buildTable(date) {
-    let data = await filterData(date);
+function getToday(){
+    let today = new Date();
+    let d = String(today.getDate()).padStart(2, '0');
+    let m = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let Y = today.getFullYear();
 
-    if (data.length != 0) {
-        $('#formHorarios').after('<table class="table table-hover table-sm table-bordered" style="border-collapse: separate; border-spacing: 0; border-radius: 5px; -moz-border-radius: 5px;"></table>');
-        $('table').append('<thead style="background-color:#4e73df; color: white;"></thead>');
-        $('thead').append('<tr></tr>');
-        $('tr').append('<th scope="col"><small><b>Horário</b></small></th>');
-        $('tr').append('<th scope="col"><small><b>Nome</b></small></th>');
-        $('tr').append('<th scope="col"><small><b>Serviço</b></small></th>');
-        $('tr').append('<th scope="col"><small><b>Telefone</b></small></th>');
-        $('tr').append('<th scope="col"><small><b>Ação</b></small></th>');
-        $('thead').after('<tbody></tbody>');
-        await data.forEach(function (element, index) {
-            $('tbody').append(`<tr id="lineBody${index}"></tr>`);
-            $(`#lineBody${index}`).append(`<td><small>${element['date_time'].substring(11, 16)}</small></td>`);
-            $(`#lineBody${index}`).append(`<td><small>${element['name']}</small></td>`);
-            $(`#lineBody${index}`).append(`<td><small>${element['service']}</small></td>`);
-            $(`#lineBody${index}`).append(`<td><small>${element['phone']}</small></td>`);
-            $(`#lineBody${index}`).append(`<td><button value="${element['id']}" class="btn btn-sm btn-danger btnDelete" data-bs-toggle="modal" data-bs-target="#exampleModal" data-name="${element['name']}">Excluir</td>`);
-        })
-    } else {
-        $('form').after('<div class="alert alert-primary" role="alert">Sem agendamentos para este dia até o momento!</div>');
+    return `${Y}-${m}-${d}`;
+}
+
+function getObjectColumns(){
+    return [     
+        {
+            "classes": "text-center", 
+            "name": "schedule", 
+            "title": "Horário"
+        },
+        {
+            "name": "name", 
+            "title": "Nome" 
+        },
+        { 
+            "name": "service", 
+            "title": "Serviço", 
+            "breakpoints": "xs" 
+        },
+        { 
+            "name": "phone", 
+            "title": "Telefone", 
+            "breakpoints": "xs" 
+        },
+        { 
+            "classes": "text-center", 
+            "name": "action", 
+            "title": "Ação" 
+        },
+    ];
+}
+
+async function updateTable(){
+    activateLoadingBtnFilter();
+
+    let date = document.getElementById('inputDate').value;
+
+    if(!date){
+        alert('Digite uma data.')
     }
 
+    let schedulings = await schedulingApi.getPerDate(date);
 
+    let columns = getObjectColumns();
+    let rows = createObjectRows(schedulings); 
+
+    createFooTable(columns, rows);
+
+    disableLoadingBtnFilter();
 }
 
-function insertIDModal(id, name) {
-    $('#modalBody').append(`<p class="pModal"> Deseja realmente excluir o agendamento de <strong>${name}</strong>?</p>`);
-    // $('#modalBody').append(`<input type="text" value="${id}" id="inputID" hidden>`);
-    $('.btnConfirm').val(id);
+function createFooTable(columns, rows){
+    $('.table').html('');
+    $('.table').footable(
+        {
+            "columns": columns,
+            "rows": rows,
+            "empty": "Nenhum agendamento encontrado."
+        }
+    );
 }
 
-function removeIDModal() {
-    $('.pModal').remove();
-    $('#inputID').remove();
+function openModalDeleteScheduling(id){
+    document.getElementById('btnDelete').setAttribute('data-id-scheduling', id);
+
+    $('#modalConfirm').modal('show');
 }
 
-function eventBtnDelete() {
-    $('.btnDelete').on('click', function (element) {
-        insertIDModal(element.target.value, element.target.dataset.name);
-    });
+async function deleteScheduling(){
+    let id = document.getElementById('btnDelete').getAttribute('data-id-scheduling');
+
+    if(!id){
+        $('#modalConfirm').modal('toggle'); 
+        return;
+    }
+
+    await schedulingApi.delete(id);
+
+    updateTable();
+
+    $('#modalConfirm').modal('toggle'); 
 }
 
-function eventFilterBtn() {
-    $('#filterBtn').on('click', async function () {
-        $('#filterBtn').addClass('disabled');
-        await $('.alert').remove();
-        await $('table').remove();
-        $('form').after('<a class="spinner-border text-primary" role="status"></a>');
-        await buildTable($('#inputDate').val());
-        $('.spinner-border').remove();
-        $('#filterBtn').removeClass('disabled');
-        eventBtnDelete();
-    });
+function activateLoadingBtnFilter(){
+    let btnFilter = document.getElementById('btnFilter');
 
+    btnFilter.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...';
+    btnFilter.setAttribute('disabled', true);
 }
 
-function eventBtnCloseModal() {
-    $('.btnCloseModal').on('click', function () {
-        removeIDModal();
-    })
-}
-
-async function deleteScheduling(id) {
-    let result;
-
-    await $.ajax({
-            url: `${Enums.Url}api/scheduling/${id}`,
-            type: 'delete'
-        })
-        .done(function (response) {
-            result = response;
-        })
-
-    return result;
-}
-
-function eventBtnConfirm() {
-    $('.btnConfirm').on('click', async function (element) {
-        await deleteScheduling(element.target.value);
-        document.location.reload();
-    });
-
+function disableLoadingBtnFilter(){
+    let btnFilter = document.getElementById('btnFilter');
+    
+    btnFilter.innerHTML = 'Filtrar';
+    btnFilter.removeAttribute('disabled');
 }

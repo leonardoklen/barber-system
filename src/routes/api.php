@@ -21,6 +21,7 @@ Route::prefix('scheduling')->group(function () {
     Route::post('', [SchedulingController::class, 'create']);
     Route::get('', [SchedulingController::class, 'readAll']);
     Route::get('/{id}', [SchedulingController::class, 'read']);
+    Route::get('/per-date/{date}', [SchedulingController::class, 'readAllPerDate']);
     Route::put('/{id}', [SchedulingController::class, 'update']);
     Route::delete('/{id}', [SchedulingController::class, 'delete']);
 });

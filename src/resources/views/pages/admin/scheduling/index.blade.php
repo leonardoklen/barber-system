@@ -1,28 +1,30 @@
 @include('components.admin.head')
 
-<h1 class="display-5 mt-3 mb-4" id="titleTable">Tabela de Horários</h1>
+<h1 class="text-dark-blue mb-4">Agendamentos</h1>
 
-<form id="formHorarios" class="row g-3">
-    <div class="col-auto">
+<form class="row mb-4">
+    <div class="col-12 col-sm-6 col-md-3 col-xl-2 mt-2">
         <input type="date" class="form-control" id="inputDate">
     </div>
-    <div class="col-auto">
-        <a class="btn btn-primary mb-3" id="filterBtn">Filtrar</a>
+    <div class="col-12 col-sm-4 col-md-2 col-xl-2 mt-2">
+        <button class="btn btn-dark-blue w-100 mb-3" id="btnFilter">Filtrar</button>
     </div>
 </form>
 
-<!-- Modal Delete Schedule-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<table class="table table-striped border"></table>
+
+<div class="modal" id="modalConfirm" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+                <i class="bi bi-exclamation-triangle-fill text-warning"></i>
             </div>
-            <div class="modal-body" id="modalBody">
+            <div class="modal-body">
+                Tem certeza que deseja excluir esse agendamento? Essa ação não poderá ser revertida.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btnCloseModal" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger btnConfirm">Excluir</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" onclick="window.deleteScheduling()">Excluir</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>                
             </div>
         </div>
     </div>
