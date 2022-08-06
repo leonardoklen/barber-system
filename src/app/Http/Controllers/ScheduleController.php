@@ -32,7 +32,7 @@ class ScheduleController extends Controller
 
             $schedules = json_decode(Schedule::where('day_number', '=', $dayNumber)->where('status', '=', true)->first()->getAttributes()['schedules'], true);
 
-            $retorno = [];
+            $return = [];
             $status = true;
 
             foreach ($schedules as $schedule) {
@@ -41,11 +41,19 @@ class ScheduleController extends Controller
                         $status = false;
                     }
                 }
-                $retorno[] = ['schedule' => $schedule, 'status' => $status];
+                $return[] = ['schedule' => $schedule, 'status' => $status];
                 $status = true;
+            }            
+
+            $currentTime = Carbon::createFromFormat('H:i', Carbon::now()->format('H:i'));
+
+            if($inputDateCarbon->format('d-m-y') === Carbon::now()->format('d-m-y')){
+                $return = array_filter($return, function($schedule) use ($currentTime){
+                    if(Carbon::createFromFormat('H:i', $schedule['schedule'])->gt($currentTime)) return true;
+                });
             }
 
-            return response()->json($retorno);
+            return response()->json($return);
         } catch (\Throwable $error) {
             return response()->json(["message" => "Falha ao obter horários: " . $error->getMessage()], 500);
         };
