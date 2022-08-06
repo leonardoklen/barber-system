@@ -1,3 +1,8 @@
+thead{
+    background-color:#4e73df;
+    color: white;
+}
+
 .bg-dark-blue{
     background-color:#4e73df
 }
@@ -21,7 +26,7 @@
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #0d6efd;
     --bs-btn-disabled-border-color: #0d6efd;
-    max-width: 120px;
+    max-width: 150px;
 }
 
 .div-content{
@@ -40,4 +45,13 @@
         padding: 1rem;
         margin: 1rem;
     }
+}
+
+td {
+    font-size: 16px !important;
+}
+
+.pagination li {
+    padding: 10px;
+    border: 1px solid grey;
 }
