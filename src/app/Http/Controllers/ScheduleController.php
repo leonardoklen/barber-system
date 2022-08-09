@@ -23,6 +23,10 @@ class ScheduleController extends Controller
                 return response()->json([]);
             }
 
+            if($inputDateCarbon->gt(Carbon::now()->addMonths(3))){
+                return response()->json([]);
+            }
+
             $dateInitial = $inputDateString . ' 00:00:00';
             $dateFinal = $inputDateString . ' 23:59:59';
 
@@ -51,7 +55,7 @@ class ScheduleController extends Controller
                 $return = array_filter($return, function($schedule) use ($currentTime){
                     if(Carbon::createFromFormat('H:i', $schedule['schedule'])->gt($currentTime)) return true;
                 });
-            }
+            }            
 
             return response()->json($return);
         } catch (\Throwable $error) {
