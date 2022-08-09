@@ -39,7 +39,7 @@ class UserController extends Controller
     public static function checkIfSessionExists($location) {
         if($location != '/admin') {
             if(!isset($_SESSION['userName'])) {
-                header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . "/admin");
+                header("Location: " . Config::get('config.URL_BASE') . "admin");
                 exit;
             }
         }
